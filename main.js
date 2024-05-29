@@ -3,7 +3,7 @@
 // const server = http.createServer("0.0.0.0");
 // server.listen(port);
 
-import './style.css';
+// import './style.css';
 import * as THREE from 'three';
 // import "http";
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
