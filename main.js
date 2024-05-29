@@ -4,8 +4,7 @@
 // server.listen(port);
 
 // import './style.css';
-import * as THREE from 'three';
-// import "http";
+import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
 // import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 // Setup
