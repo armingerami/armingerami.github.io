@@ -89,9 +89,29 @@
       </section>
 
       <section class="light">
-        <h2>(Bonus Bonus) Chess.com Daily Puzzle:</h2>
-      <iframe style="width: 400px; height: 560px;" src="https://www.chess.com/daily_puzzle" frameborder="0"></iframe>
-      </section>
+        <h2>(Bonus Bonus) Daily Chess Puzzle:</h2>
+            <div>
+    <a id="puzzleLink" href="https://chesspuzzle.net/Daily">
+    <img id="puzzleImage" alt="Daily Chess Puzzle" />
+    </a><br />
+    <h3><span id="puzzleText" /></h3>
+    </div>
+
+    <script type="text/javascript">
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://chesspuzzle.net/Daily/Api', true);
+    request.onload = function () {
+    if (request.status >= 200 && request.status < 400) {
+    var result = JSON.parse(request.responseText);
+    document.getElementById("puzzleText").textContent = result.Text;
+    document.getElementById("puzzleLink").href = result.Link;
+    document.getElementById("puzzleImage").src = result.Image;
+    }
+    };
+    request.send();
+    </script>
+    <!--  <iframe style="width: 400px; height: 560px;" src="https://www.chess.com/daily_puzzle" frameborder="0"></iframe>
+      </section> -->
 
 <!--       <blockquote>
         <a href="https://www.linkedin.com/in/armingerami/"><img src="./favicon.svg" alt="Logo"></a>
