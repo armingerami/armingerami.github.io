@@ -27,8 +27,8 @@
       <section>
         <h2>📜 Bio</h2>
         <p>
-          I'm a Computer Science Ph.D. candidate at the University of Maryland, working under the guidance of <a href="https://www.cs.umd.edu/people/rduraisw"><u>Prof. Ramani Duraiswami</u></a>. My research interests lie in the domains of differentiable programming, high performance computing, and signal processing. Currently, I'm working on  improving the computational efficiency of transformers,
-and neural operator learning. 
+          I'm a Computer Science Ph.D. candidate at the University of Maryland, working under the guidance of <a href="https://www.cs.umd.edu/people/rduraisw"><u>Prof. Ramani Duraiswami</u></a>. My research interests lie in the domains of differentiable programming, high performance computing, and signal processing. Currently, I'm working on improving the computational efficiency of transformers,
+and matrix multiplication in neural networks. 
         </p>
       </section>
 
@@ -46,6 +46,9 @@ and neural operator learning.
 
         <h2>🏆 Awards</h2>
         <p>
+          Recipient of the NSF NeuroPAC Fellowship Award for Summer 2025.
+        </p>
+        <p>
           Outstanding graduate research assistant awrad for AY 2023-2024.
         </p>
         <p>
@@ -57,20 +60,26 @@ and neural operator learning.
       <section class="left">
         <h2>🔬 Research</h2>
         <p>
-          <i>Towards Making Linear Attention Practical</i><br>
-          <span style="color: rgb(121, 55, 179);">Armin Gerami</span>, Ryan Synk, Monte Hoover, Ramani Duraiswami; Preprint<br>
-          <b><span style="color: rgb(90, 117, 161);">Summary</span>:</b> Linear attention (Kernel Separation) is a promising approach for calculating the attention in transformers with linear time complexity. However, they suffer from a high memory footprint. In this work, we propose a solution to address this high memory footprint.
-        </p>
-        <p>
-          <i>Efficient Spatial Audio Rendering Via Differentiable FIR To IIR Estimation</i><br>
-          <span style="color: rgb(121, 55, 179);">Armin Gerami</span>, Bowen Zhi, Dmitry N. Zotkin, Ramani Duraiswami; ICASSP'25<br>
-          <b><span style="color: rgb(90, 117, 161);">Summary</span>:</b> We introduce a convex optimization for estimating FIR filters with an IIR filter, and achieve 2× speedup with an accuracy of %0.01 through differential programming.
+          <i>Fastmax: Extensively Optimized Linear Attention Implementation</i><br>
+          <span style="color: rgb(121, 55, 179);"><b>Armin Gerami</b></span><span style="color: rgb(128, 128, 128);">, Ramani Duraiswami</span>; Supercomputing'25<br>
+          <b><span style="color: rgb(90, 117, 161);">Summary</span>:</b> Linear attention (Kernel Separation) is a promising approach for calculating the attention in transformers with linear time complexity. However, it introduces a significant data movement overhead. We present a CUDA library that achieves a 3.3× speedup and 3.6× reduction in memory consumption for linear attention implementation compared to the state-of-the-art.
         </p>
         <p>
           <i>GUST: Graph Edge-Coloring Utilization for Accelerating Sparse Matrix Vector Multiplication</i><br>
-          <span style="color: rgb(121, 55, 179);">Armin Gerami</span>, Bahar Asgari; ASPLOS'25<br>
+          <span style="color: rgb(121, 55, 179);"><b>Armin Gerami</b></span><span style="color: rgb(128, 128, 128);">, Bahar Asgari</span>; ASPLOS'25<br>
           <b><span style="color: rgb(90, 117, 161);">Summary</span>:</b> A software/hardware codesign to accelerate sparse matrix-vector multiplication. The harware enables resource sharing while the graph-edge-coloring schedules the input stream to prevent collisions.
         </p>
+        <p>
+          <i>Efficient Spatial Audio Rendering Via Differentiable FIR To IIR Estimation</i><br>
+          <span style="color: rgb(121, 55, 179);"><b>Armin Gerami</b></span><span style="color: rgb(128, 128, 128);">, Bowen Zhi, Dmitry N. Zotkin, Ramani Duraiswami</span>; ICASSP'25<br>
+          <b><span style="color: rgb(90, 117, 161);">Summary</span>:</b> We introduce a novel convex optimization algorithm for estimating FIR filters with an IIR filter, and achieve 2× speedup with an accuracy of %0.01 through differential programming.
+        </p>
+        <p>
+          <i>Room Impulse Response Synthesis via Differentiable Feedback Delay Networks</i><br>
+          <span style="color: rgb(121, 55, 179);"><b>Armin Gerami</b></span><span style="color: rgb(128, 128, 128);">, Ramani Duraiswami</span>; WASPAA'25<br>
+          <b><span style="color: rgb(90, 117, 161);">Summary</span>:</b>  We introduce a computationally efficient and tunable feedback-delay-network (FDN) architecture for real-time room-impulse-response (RIR) rendering, addressing the computational and latency challenges inherent in traditional convolution and Fourier transform-based methods.
+        </p>
+        
 
         <h2>🚀 Invention Disclosures</h2>
         <p>
@@ -78,6 +87,12 @@ and neural operator learning.
         </p>
         <p>
           Rapid Energy and Emission Auditor
+        </p>
+                
+
+        <h2>💻 Coding Languages</h2>
+        <p>
+          CUDA, C++, Python, Verilog
         </p>
       </section>
 
