@@ -114,10 +114,25 @@ and matrix multiplication in neural networks.
         </p>
       </section>
 
-      <section class="light">
-        <h2>(Bonus Bonus) Daily Chess Puzzle:</h2>
-<iframe id="12257825" allowtransparency="true" frameborder="0" style="width:100%;border:none;" src="//www.chess.com/daily"></iframe><script>window.addEventListener("message",e=>{e['data']&&"12257825"===e['data']['id']&&document.getElementById(`${e['data']['id']}`)&&(document.getElementById(`${e['data']['id']}`).style.height=`${e['data']['frameHeight']+37}px`)});</script>
-      </div>
+<section class="light">
+    <h2>(Bonus Bonus) Daily Chess Puzzle:</h2>
+    
+    <iframe id="12257825" 
+            allowtransparency="true" 
+            frameborder="0" 
+            style="width:100%; border:none;" 
+            src="//www.chess.com/daily_puzzle/embed">
+    </iframe>
+
+    <script>
+        window.addEventListener("message", e => {
+            if (e.data && e.data.id === "12257825" && document.getElementById(e.data.id)) {
+                const iframe = document.getElementById(e.data.id);
+                iframe.style.height = `${e.data.frameHeight + 37}px`;
+            }
+        });
+    </script>
+</section>
 
     <!-- <script type="text/javascript">
     var request = new XMLHttpRequest();
@@ -167,5 +182,6 @@ and matrix multiplication in neural networks.
 
   </body>
 </html>
+
 
 
