@@ -82,7 +82,8 @@ scene.add(armin);
 // Moon
 
 // const moonTexture = new THREE.TextureLoader().load('moon.jpg');
-const moonTexture = new THREE.TextureLoader().load('bear head.jpg');
+// const moonTexture = new THREE.TextureLoader().load('bear head.jpg');
+const moonTexture = new THREE.TextureLoader().load('earth.jpg');
 // const normalTexture = new THREE.TextureLoader().load('normal.jpg');
 
 const moon = new THREE.Mesh(
@@ -135,5 +136,6 @@ function animate() {
 
   renderer.render(scene, camera);
 }
+
 
 animate();
