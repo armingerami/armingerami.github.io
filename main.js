@@ -1,141 +1,109 @@
-// const port = 3000;
-// const http = require('node:http');
-// const server = http.createServer("0.0.0.0");
-// server.listen(port);
+// Footer year
+document.getElementById('year').textContent = new Date().getFullYear();
 
-// import './style.css';
-import * as THREE from 'https://unpkg.com/three@0.127.0/build/three.module.js';
-// import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Setup
+// Nav: border on scroll + highlight current section
+const nav = document.querySelector('.nav');
+const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 8);
+onScroll();
+window.addEventListener('scroll', onScroll, { passive: true });
 
-const scene = new THREE.Scene();
+const navLinks = [...document.querySelectorAll('.nav nav a[href^="#"]')];
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (!entry.isIntersecting) return;
+    navLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id));
+  });
+}, { rootMargin: '-45% 0px -50% 0px' });
+document.querySelectorAll('section[id]').forEach((s) => sectionObserver.observe(s));
 
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-
-const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector('#bg'),
-});
-
-renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
-camera.position.setX(-3);
-
-renderer.render(scene, camera);
-
-// Torus
-
-const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
-// const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
-const test = new THREE.TextureLoader().load('moon.jpg');
-const normalTexture = new THREE.TextureLoader().load('normal.jpg');
-const material = new THREE.MeshStandardMaterial({map: test, normalMap: normalTexture});
-const torus = new THREE.Mesh(geometry, material);
-
-scene.add(torus);
-
-// Lights
-
-const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(5, 5, 5);
-
-const ambientLight = new THREE.AmbientLight(0xffffff);
-scene.add(pointLight, ambientLight);
-
-// Helpers
-
-// const lightHelper = new THREE.PointLightHelper(pointLight)
-// const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper)
-
-// const controls = new OrbitControls(camera, renderer.domElement);
-
-function addStar() {
-  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
-  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
-  const star = new THREE.Mesh(geometry, material);
-
-  const [x, y, z] = Array(3)
-    .fill()
-    .map(() => THREE.MathUtils.randFloatSpread(100));
-
-  star.position.set(x, y, z);
-  scene.add(star);
+// Reveal on scroll
+if (!reduceMotion && 'IntersectionObserver' in window) {
+  const targets = document.querySelectorAll('.section-head, .prose, .focus, .role, .pub, .more-pubs, .card');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in');
+      revealObserver.unobserve(entry.target);
+    });
+  }, { rootMargin: '0px 0px -8% 0px' });
+  targets.forEach((el) => { el.classList.add('reveal'); revealObserver.observe(el); });
 }
 
-Array(200).fill().forEach(addStar);
+// Hero background: a few faint geometric-Brownian-motion price paths drawing across the page
+(() => {
+  const canvas = document.querySelector('.hero-paths');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const STEPS = 220;
+  let paths = [];
+  let progress = 0;
+  let width = 0;
+  let height = 0;
 
-// Background
+  // Box–Muller standard normal
+  const randn = () => {
+    const u = 1 - Math.random();
+    const v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  };
 
-const spaceTexture = new THREE.TextureLoader().load('space.jpg');
-scene.background = spaceTexture;
+  const simulate = () => {
+    paths = Array.from({ length: 7 }, (_, i) => {
+      const mu = 0.0006;
+      const sigma = 0.012 + i * 0.0025;
+      const pts = [1];
+      for (let t = 1; t < STEPS; t++) pts.push(pts[t - 1] * Math.exp(mu - 0.5 * sigma * sigma + sigma * randn()));
+      return { pts, highlight: i === 0 };
+    });
+    const all = paths.flatMap((p) => p.pts);
+    const lo = Math.min(...all);
+    const hi = Math.max(...all);
+    paths.forEach((p) => { p.ys = p.pts.map((v) => 0.82 - 0.6 * (v - lo) / (hi - lo || 1)); });
+  };
 
-// Avatar
+  const resize = () => {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
+    canvas.width = width * dpr;
+    canvas.height = height * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  };
 
-const arminTexture = new THREE.TextureLoader().load('armin1.jpg');
+  const draw = () => {
+    const styles = getComputedStyle(document.documentElement);
+    const gold = styles.getPropertyValue('--gold').trim();
+    const line = styles.getPropertyValue('--line').trim();
+    ctx.clearRect(0, 0, width, height);
+    const n = Math.max(2, Math.floor(progress * STEPS));
+    paths.forEach((p) => {
+      ctx.beginPath();
+      for (let t = 0; t < n; t++) {
+        const x = (t / (STEPS - 1)) * width;
+        const y = p.ys[t] * height;
+        t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      }
+      ctx.strokeStyle = p.highlight ? gold : line;
+      ctx.globalAlpha = p.highlight ? 0.55 : 0.9;
+      ctx.lineWidth = p.highlight ? 1.5 : 1;
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+  };
 
-const armin = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: arminTexture }));
+  const animate = () => {
+    progress = Math.min(1, progress + 0.006);
+    draw();
+    if (progress < 1) requestAnimationFrame(animate);
+  };
 
-scene.add(armin);
-
-// Moon
-
-// const moonTexture = new THREE.TextureLoader().load('moon.jpg');
-// const moonTexture = new THREE.TextureLoader().load('bear head.jpg');
-const moonTexture = new THREE.TextureLoader().load('earth.jpg');
-// const normalTexture = new THREE.TextureLoader().load('normal.jpg');
-
-const moon = new THREE.Mesh(
-  new THREE.SphereGeometry(3, 32, 32),
-  new THREE.MeshStandardMaterial({
-    map: moonTexture,
-    // normalMap: normalTexture,
-  })
-);
-
-scene.add(moon);
-
-moon.position.z = 30;
-moon.position.setX(-10);
-
-armin.position.z = -5;
-armin.position.x = 2;
-
-// Scroll Animation
-
-function moveCamera() {
-  const t = document.body.getBoundingClientRect().top;
-  // moon.rotation.x += 0.05;
-  moon.rotation.y += 0.075;
-  // moon.rotation.z += 0.05;
-
-  armin.rotation.y += 0.01;
-  armin.rotation.z += 0.01;
-
-  camera.position.z = t * -0.01;
-  camera.position.x = t * -0.0002;
-  camera.rotation.y = t * -0.0002;
-}
-
-document.body.onscroll = moveCamera;
-moveCamera();
-
-// Animation Loop
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  torus.rotation.x += 0.001;
-  torus.rotation.y += 0.0024;
-  torus.rotation.z += 0.0018;
-
-  moon.rotation.y += 0.0075;
-
-  // controls.update();
-
-  renderer.render(scene, camera);
-}
-
-
-animate();
+  simulate();
+  progress = reduceMotion ? 1 : 0;
+  resize();
+  window.addEventListener('resize', resize);
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', draw);
+  if (!reduceMotion) requestAnimationFrame(animate);
+})();
