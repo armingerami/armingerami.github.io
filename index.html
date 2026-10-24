@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css?v=3" />
   </head>
   <body>
     <main>
@@ -29,9 +29,9 @@
 
       <p>
         I'm a Computer Science Ph.D. student at the University of Maryland, advised by
-        <a href="https://www.cs.umd.edu/people/rduraisw">Ramani Duraiswami</a>. I work on making Transformers
-        more efficient (sub-quadratic attention, KV-cache reduction, quantization) and on applying them to
-        financial markets. Before that, I studied electrical engineering, focusing on signal processing.
+        <a href="https://www.cs.umd.edu/people/rduraisw">Ramani Duraiswami</a>. My research focuses on Transformer
+        efficiency (sub-quadratic attention, KV-cache reduction), post-training optimization of Transformers,
+        and prediction models.
       </p>
 
       <section>
@@ -58,36 +58,54 @@
 
       <section>
         <h2>Selected publications</h2>
-        <ul class="entries">
+        <ul class="entries pubs">
           <li>
-            <a href="https://www.alphaxiv.org/abs/2610.iceberg-attention-long-context-decoding">Iceberg Attention: Sublinear Long-Context Decoding with Mixture-of-Gaussians</a>
-            <p><b>A. Gerami</b>, L. Koroshinadze, S. Madani, P. Pandey, R. Duraiswami</p>
-            <p class="venue">Preprint, 2026</p>
+            <a class="thumb" href="https://www.alphaxiv.org/abs/2610.iceberg-attention-long-context-decoding" tabindex="-1" aria-hidden="true"><img src="assets/pubs/iceberg.png" alt="" loading="lazy" /></a>
+            <div>
+              <a href="https://www.alphaxiv.org/abs/2610.iceberg-attention-long-context-decoding">Iceberg Attention: Sublinear Long-Context Decoding with Mixture-of-Gaussians</a>
+              <p><b>A. Gerami</b>, L. Koroshinadze, S. Madani, P. Pandey, R. Duraiswami</p>
+              <p class="venue">Preprint, 2026</p>
+            </div>
           </li>
           <li>
-            <a href="https://arxiv.org/abs/2604.10064">On the Application of Linear Attention in Multimodal Transformers</a>
-            <p><b>A. Gerami</b>, S. Madani, R. Duraiswami</p>
-            <p class="venue">CVPR 2026</p>
+            <a class="thumb" href="https://arxiv.org/abs/2604.10064" tabindex="-1" aria-hidden="true"><img src="assets/pubs/cvpr.png" alt="" loading="lazy" /></a>
+            <div>
+              <a href="https://arxiv.org/abs/2604.10064">On the Application of Linear Attention in Multimodal Transformers</a>
+              <p><b>A. Gerami</b>, S. Madani, R. Duraiswami</p>
+              <p class="venue">CVPR 2026</p>
+            </div>
           </li>
           <li>
-            <a href="https://arxiv.org/abs/2510.05140">Auditing Algorithmic Bias in Transformer-Based Trading</a>
-            <p><b>A. Gerami</b>, R. Duraiswami</p>
-            <p class="venue">NeurIPS 2025 Workshop on Generative AI in Finance</p>
+            <a class="thumb" href="https://arxiv.org/abs/2510.05140" tabindex="-1" aria-hidden="true"><img src="assets/pubs/audit.png" alt="" loading="lazy" /></a>
+            <div>
+              <a href="https://arxiv.org/abs/2510.05140">Auditing Algorithmic Bias in Transformer-Based Trading</a>
+              <p><b>A. Gerami</b>, R. Duraiswami</p>
+              <p class="venue">NeurIPS 2025 Workshop on Generative AI in Finance</p>
+            </div>
           </li>
           <li>
-            <span class="title">Two-Level Generative Evolutionary Prompt Adaptation for Non-Parametric Continual Learning</span>
-            <p><b>A. Gerami</b> et al.</p>
-            <p class="venue">Preprint</p>
+            <div class="thumb" aria-hidden="true"><img src="assets/pubs/gepa.png" alt="" loading="lazy" /></div>
+            <div>
+              <span class="title">Two-Level Generative Evolutionary Prompt Adaptation for Non-Parametric Continual Learning</span>
+              <p><b>A. Gerami</b> et al.</p>
+              <p class="venue">Preprint</p>
+            </div>
           </li>
           <li>
-            <a href="https://ieeexplore.ieee.org/abstract/document/10889134/">Efficient Spatial Audio Rendering via Differentiable FIR-to-IIR Estimation</a>
-            <p><b>A. Gerami</b>, B. Zhi, D. N. Zotkin, R. Duraiswami</p>
-            <p class="venue">ICASSP 2025</p>
+            <a class="thumb" href="https://ieeexplore.ieee.org/abstract/document/10889134/" tabindex="-1" aria-hidden="true"><img src="assets/pubs/icassp.png" alt="" loading="lazy" /></a>
+            <div>
+              <a href="https://ieeexplore.ieee.org/abstract/document/10889134/">Efficient Spatial Audio Rendering via Differentiable FIR-to-IIR Estimation</a>
+              <p><b>A. Gerami</b>, B. Zhi, D. N. Zotkin, R. Duraiswami</p>
+              <p class="venue">ICASSP 2025</p>
+            </div>
           </li>
           <li>
-            <a href="https://dl.acm.org/doi/abs/10.1145/3622781.3674186">GUST: Graph Edge-Coloring Utilization for Accelerating Sparse Matrix-Vector Multiplication</a>
-            <p><b>A. Gerami</b>, B. Asgari</p>
-            <p class="venue">ASPLOS 2024</p>
+            <a class="thumb" href="https://dl.acm.org/doi/abs/10.1145/3622781.3674186" tabindex="-1" aria-hidden="true"><img src="assets/pubs/gust.png" alt="" loading="lazy" /></a>
+            <div>
+              <a href="https://dl.acm.org/doi/abs/10.1145/3622781.3674186">GUST: Graph Edge-Coloring Utilization for Accelerating Sparse Matrix-Vector Multiplication</a>
+              <p><b>A. Gerami</b>, B. Asgari</p>
+              <p class="venue">ASPLOS 2024</p>
+            </div>
           </li>
         </ul>
         <p class="more"><a href="https://scholar.google.com/citations?user=XKrFIXMAAAAJ&hl=en">All publications</a></p>

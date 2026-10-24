@@ -1,20 +1,10 @@
 :root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
-  --line: #e6e6e6;
-  --link: #1a1a1a;
-  color-scheme: light dark;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #151515;
-    --text: #e8e8e8;
-    --muted: #9a9a9a;
-    --line: #2c2c2c;
-    --link: #e8e8e8;
-  }
+  --bg: #0f1823;
+  --text: #ece7dc;
+  --muted: #8d93a0;
+  --line: #2a3747;
+  --link: #ece7dc;
+  color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -84,10 +74,31 @@ h2 {
 .entries p { color: var(--muted); font-size: 14.5px; }
 .entries p b { color: var(--text); font-weight: 500; }
 .entries strong { font-weight: 500; }
-.entries > li > a, .title { font-weight: 500; }
+.entries > li > a, .entries > li > div > a, .title { font-weight: 500; }
+
+.pubs > li {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.pubs > li + li { margin-top: 24px; }
+.thumb {
+  display: block;
+  aspect-ratio: 16 / 10;
+  border-radius: 6px;
+  background: #fff;
+  overflow: hidden;
+}
+.thumb img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
 
 .row { display: flex; justify-content: space-between; gap: 16px; }
 .date { color: var(--muted); font-size: 14px; white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+@media (max-width: 520px) {
+  .pubs > li { grid-template-columns: 1fr; gap: 10px; }
+  .thumb { max-width: 320px; }
+}
 
 .more { margin-top: 18px; font-size: 14.5px; }
 .more a { color: var(--muted); }
