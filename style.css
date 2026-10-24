@@ -4,6 +4,8 @@
   --muted: #8d93a0;
   --line: #2a3747;
   --link: #ece7dc;
+  --gold: #c9a96e;
+  --gold-hover: #e3c891;
   color-scheme: dark;
 }
 
@@ -57,15 +59,15 @@ h1 {
   letter-spacing: -0.01em;
 }
 .links { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14.5px; }
-.links a { color: var(--muted); text-decoration: none; }
-.links a:hover { color: var(--text); }
+.links a { color: var(--gold); text-decoration: none; }
+.links a:hover { color: var(--gold-hover); }
 
 section { margin-top: 48px; }
 
 h2 {
   margin: 0 0 16px;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 18px;
+  font-weight: 600;
   color: var(--muted);
 }
 
@@ -73,7 +75,23 @@ h2 {
 .entries.compact > li + li { margin-top: 6px; }
 .entries p { color: var(--muted); font-size: 14.5px; }
 .entries p b { color: var(--text); font-weight: 500; }
-.entries strong { font-weight: 500; }
+.entries strong { font-weight: 700; }
+
+.jobs > li {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+.logo {
+  width: 40px;
+  height: 40px;
+  padding: 5px;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+}
+.logo-fill { padding: 0; }
 .entries > li > a, .entries > li > div > a, .title { font-weight: 500; }
 
 .pubs > li {
